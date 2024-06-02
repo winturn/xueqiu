@@ -47,4 +47,4 @@ class Network(object):
         milliseconds_timestamp = get_now_timestamp()
         page_url = page_url_base.format(page_num, self.__usr_id, milliseconds_timestamp)
         self.res = self.__session.get(page_url)
-        print(self.res.json())
+        # print(self.res.json())

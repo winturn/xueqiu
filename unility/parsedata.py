@@ -4,26 +4,14 @@ import re
 import bs4
 
 
-def whenElement(element):
-    match type(element):
-        case bs4.element.NavigableString:
-            return element
-        case bs4.element.Tag:
-            return whenTag(element)
-
-
-def whenTag(tag):
+def process_tag(tag):
     match tag.name:
         case 'img':
             return tag.get('title', '[图片]')
-        case 'br':
-            return ' '
         case 'a':
-            return '[{}]'.format(tag.string)
-        case 'span' | 'p' | 'strong' | 'h4' | 'b':
-            return tag.string
+            return f'[{tag.get_text()}]'
         case _:
-            return '{数据采集异常}'
+            return tag.get_text()
 
 
 def timestamp_to_datetime(timestamp_ms):
@@ -37,12 +25,12 @@ def timestamp_to_datetime(timestamp_ms):
 
 
 def html2txt(html_content):
-    res_txt = ''
-    # print(type(html_content), html_content[:20])
     soup = bs4.BeautifulSoup(html_content, features='html.parser')
-    for cur in soup.contents:
-        res_txt += str(whenElement(cur))
-    return res_txt
+    processed_text = ''.join(
+        process_tag(tag) if isinstance(tag, bs4.Tag) else str(tag)
+        for tag in soup.descendants
+    )
+    return processed_text
 
 
 def remove_non_ascii(text):

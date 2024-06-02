@@ -13,8 +13,8 @@ def get_desktop_path():
 
 if __name__ == '__main__':
     parse_data = parsedata.ParseData()
-    net_my = network.Network('1247347556')
-    for i in range(21, 22):
+    net_my = network.Network('1247347556')  # 用户id，例如大道的id是1247347556
+    for i in range(22, 23):
         print(i)
         net_my.get_page_url(i)
         res_json = net_my.res.json()
