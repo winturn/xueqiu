@@ -9,3 +9,9 @@ cp config.json.template config.json
 
 然后修改文件内的配置，改为自己账号的session
 
+执行命令运行python
+```shell
+python main.py
+```
+
+导出结果至桌面，文件名是当前日期，文件格式是excel文件

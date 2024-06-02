@@ -14,7 +14,7 @@ def get_desktop_path():
 if __name__ == '__main__':
     parse_data = parsedata.ParseData()
     net_my = network.Network('1247347556')  # 用户id，例如大道的id是1247347556
-    for i in range(22, 23):
+    for i in range(1, 2):  # range的范围是 https://xueqiu.com/u/1247347556 页面的页数
         print(i)
         net_my.get_page_url(i)
         res_json = net_my.res.json()
